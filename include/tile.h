@@ -13,7 +13,7 @@ typedef enum color_e
 } color;
 
 typedef struct {
-  int64_t x, y;
+  int32_t x, y;
 } pos;
 
 extern const pos adj[];
@@ -24,7 +24,8 @@ typedef struct tile_s
 {
   color sides[SIDE_COUNT];
   color back;
-  int64_t x, y;
+  int8_t shape[COLOR_COUNT][2]; // see https://cdecl.org/?q=char+shape%5B4%5D%5B2%5D%3B
+  int32_t x, y;
   uint8_t rotation;
   /*
    * rotation used as an offset in sides:

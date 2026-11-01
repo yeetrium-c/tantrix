@@ -58,5 +58,6 @@ nob
 nob.old
 *.json
 .cache/*
+**/.cache/*
 bin/*
 

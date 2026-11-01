@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 {
   NOB_GO_REBUILD_URSELF(argc, argv);
 
-  shift(argv, argc);
+  (void)shift(argv, argc);
 
   if (!mkdir_if_not_exists(BINDIR)) return 1;
   if (!mkdir_if_not_exists(ODIR)) return 1;
@@ -35,9 +35,13 @@ int main(int argc, char **argv)
   nob_cc_output(&cmd, TRGT);
   nob_cc_inputs(&cmd, SRC, ODIR "tile.o");
   nob_cc_flags(&cmd);
-  nob_cmd_append(&cmd, "-ggdb", "-pg");
-  // nob_cmd_append(&cmd, "-O3");
+  nob_cmd_append(&cmd, "-Wno-strict-aliasing");
+  // nob_cmd_append(&cmd, "-ggdb", "-pg");
+  nob_cmd_append(&cmd, "-O0");
   nob_cmd_append(&cmd, "-I" IDIR, "-lraylib");
+  nob_cmd_append(&cmd, "-I.");
+  nob_cmd_append(&cmd, "-Idijkstra/fheap/include", "-Ldijkstra/fheap/lib", "-lfheap");
+  nob_cmd_append(&cmd, "-ggdb");
 #ifndef _WIN32
   nob_cmd_append(&cmd, "-lm");
 #endif
